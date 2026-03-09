@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKRA DA KRAB — Морское кафе · Тюмень</title>
+<meta name="description" content="Морское кафе в Тюмени. Камчатский краб, красная икра, живые устрицы. Прямые поставки IkraDaKrab.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root{
+  --w:   #FFFFFF;
+  --off: #F6F5F2;
+  --k:   #0A0A0F;
+  --k2:  #1A1A22;
+  --blu: #0047FF;
+  --blu2:#0035CC;
+  --slt: #E8EEFF;
+  --red: #E8321E;
+  --red2:#CC2A18;
+  --grn: #00B87A;
+  --mute:#7A7A8C;
+  --bord:rgba(10,10,15,.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Crimson Pro',serif;
+  background:var(--w);
+  color:var(--k);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+.container{max-width:1360px;margin:0 auto;padding:0 48px;}
+
+/* NOISE */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply;opacity:.9;
+}
+
+/* TYPE */
+.syne{font-family:'Syne',sans-serif;}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;font-weight:800;line-height:1.0;}
+h1{font-size:clamp(3.5rem,10vw,11rem);letter-spacing:-.03em;}
+h2{font-size:clamp(2.5rem,5.5vw,6rem);letter-spacing:-.03em;}
+h3{font-size:clamp(1.8rem,3vw,3rem);letter-spacing:-.02em;}
+
+/* ── BTN ── */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 32px;font-family:'Syne',sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;cursor:pointer;
+  transition:all .22s;border:none;
+}
+.btn-blu{background:var(--blu);color:var(--w);}
+.btn-blu:hover{background:var(--blu2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,71,255,.35);}
+.btn-k{background:var(--k);color:var(--w);}
+.btn-k:hover{background:var(--k2);transform:translateY(-2px);}
+.btn-outline{background:transparent;border:2px solid var(--k);color:var(--k);}
+.btn-outline:hover{background:var(--k);color:var(--w);}
+.btn-outline-w{background:transparent;border:2px solid rgba(255,255,255,.4);color:var(--w);}
+.btn-outline-w:hover{background:rgba(255,255,255,.12);}
+.btn-red{background:var(--red);color:var(--w);}
+.btn-red:hover{background:var(--red2);}
+
+/* PILL */
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--mute);
+  margin-bottom:16px;
+}
+.pill-dot{width:6px;height:6px;border-radius:50%;background:var(--blu);flex-shrink:0;}
+.pill-dot.red{background:var(--red);}
+
+/* ════════════════════════════════════════
+   HEADER
+════════════════════════════════════════ */
+.hdr{
+  position:fixed;top:0;left:0;right:0;z-index:400;
+  height:68px;padding:0 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .35s;
+}
+.hdr.on{
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--bord);
+}
+.logo{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1.1rem;letter-spacing:.01em;color:var(--w);
+  display:flex;align-items:center;gap:3px;
+  transition:color .25s,opacity .25s;
+}
+.logo-blu{color:var(--blu);}
+.logo-dot{
+  width:6px;height:6px;background:var(--red);border-radius:50%;
+  margin:0 2px 4px;
+}
+nav{display:flex;gap:36px;}
+nav a{
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72);
+  transition:color .2s,opacity .2s;
+}
+nav a:hover{color:var(--w);}
+.hdr-r{display:flex;align-items:center;gap:14px;}
+.hdr-tel{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.9);transition:color .2s,opacity .2s;}
+.hdr-tel:hover{color:var(--w);}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;}
+.ham span{display:block;width:24px;height:2px;background:var(--w);border-radius:1px;transition:all .3s;}
+.ham.act span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.ham.act span:nth-child(2){opacity:0;}
+.ham.act span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.hdr.on .logo{color:var(--k);}
+.hdr.on nav a{color:var(--mute);}
+.hdr.on nav a:hover{color:var(--k);}
+.hdr.on .hdr-tel{color:var(--k);}
+.hdr.on .hdr-tel:hover{color:var(--blu);}
+.hdr.on .ham span{background:var(--k);}
+
+/* MOB MENU */
+.mob{display:none;position:fixed;inset:0;z-index:390;background:var(--k);flex-direction:column;padding:100px 48px 60px;}
+.mob.open{display:flex;}
+.mob a{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,9vw,5rem);font-weight:800;color:var(--w);padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);transition:color .2s;}
+.mob a:hover{color:var(--blu);}
+.mob-ft{margin-top:auto;display:flex;flex-direction:column;gap:8px;}
+.mob-ft a{font-family:'Syne',sans-serif;font-size:14px;font-weight:500;border:none;padding:4px 0;color:rgba(255,255,255,.4);}
+
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+.hero{
+  min-height:100svh;
+  background:var(--k);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  padding-top:68px;
+}
+
+/* Giant BG number */
+.hero-bg-n{
+  position:absolute;
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(30rem,60vw,80rem);
+  line-height:.85;letter-spacing:-.05em;
+  color:rgba(0,71,255,.06);
+  top:-10%;right:-5%;
+  pointer-events:none;z-index:0;
+  user-select:none;white-space:nowrap;
+}
+
+.hero-content{
+  position:relative;z-index:1;
+  flex:1;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 48px 0;
+  max-width:1360px;margin:0 auto;width:100%;
+}
+
+/* Three-column hero layout */
+.hero-cols{
+  display:grid;grid-template-columns:minmax(0,1.18fr) minmax(300px,.82fr);
+  border-top:1px solid rgba(255,255,255,.1);
+  flex:1;min-height:0;
+  align-items:stretch;
+}
+.hero-col{
+  padding:48px 40px;
+  border-right:1px solid rgba(255,255,255,.1);
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.hero-col:last-child{border-right:none;}
+
+/* Col 1: headline */
+.hero-col1{padding-right:56px;}
+.hero-open-inline{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(0,71,255,.14);border:1px solid rgba(0,71,255,.4);border-radius:999px;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--w);width:max-content;}
+.hero-open-inline::before{content:'';width:8px;height:8px;border-radius:50%;background:#4cff88;box-shadow:0 0 0 6px rgba(76,255,136,.12);}
+.hero-eyebrow{
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--blu);display:block;}
+.hero-h{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(3rem,7vw,8rem);letter-spacing:-.04em;
+  line-height:.95;color:var(--w);
+}
+.hero-h span{display:block;}
+.hero-h .accent{color:var(--blu);}
+.hero-h .italic{font-style:italic;font-family:'Crimson Pro',serif;font-weight:300;color:rgba(255,255,255,.55);font-size:60%;}
+
+/* Col 2: photo */
+.hero-col2{
+  padding:28px;
+  overflow:visible;
+  position:relative;
+  display:flex;
+  align-items:stretch;
+  justify-content:center;
+}
+.hero-col2::before{
+  content:'';
+  position:absolute;
+  inset:11% 6% 16%;
+  background:radial-gradient(circle at 50% 40%, rgba(0,71,255,.28), transparent 68%);
+  filter:blur(34px);
+  opacity:.95;
+  pointer-events:none;
+}
+.hero-photo-card{
+  position:relative;
+  width:100%;
+  min-height:540px;
+  border-radius:30px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  background:#101117;
+  box-shadow:0 34px 80px rgba(0,0,0,.46);
+}
+.hero-photo-card::after{
+  content:'';
+  position:absolute;inset:0;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:inherit;
+  pointer-events:none;
+}
+.hero-photo{
+  position:absolute;inset:0;
+  background:url('https://static.tildacdn.com/stor3130-3439-4039-b031-653338613032/88976407.jpg') 58% center/cover no-repeat;
+  opacity:.88;
+  transform:scale(1.02);
+  transition:transform 8s ease;
+}
+.hero-photo-card:hover .hero-photo{transform:scale(1.07);}
+.hero-col2-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(10,10,15,.06) 0%, rgba(10,10,15,.18) 35%, rgba(10,10,15,.78) 100%),
+    linear-gradient(90deg, rgba(10,10,15,.32) 0%, transparent 34%, rgba(10,10,15,.14) 100%);
+}
+.hero-col2-label{
+  position:absolute;left:28px;right:28px;bottom:26px;
+  font-family:'Crimson Pro',serif;font-size:1.18rem;font-style:italic;
+  line-height:1.35;max-width:270px;
+  color:rgba(255,255,255,.86);z-index:2;
+  text-shadow:0 8px 22px rgba(0,0,0,.28);
+}
+.hero-badge-float{
+  position:absolute;top:22px;right:22px;z-index:3;
+  background:var(--blu);color:var(--w);
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:9px 16px;
+  transform:translateZ(0);
+  box-shadow:0 12px 32px rgba(0,71,255,.38);
+}
+
+/* Col 3: stats + cta */
+.hero-col3{justify-content:space-between;padding-top:80px;padding-left:48px;}
+.hero-stats{display:flex;flex-direction:column;gap:0;}
+.hst{
+  padding:20px 0;border-bottom:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:baseline;gap:14px;
+}
+.hst:first-child{border-top:1px solid rgba(255,255,255,.08);}
+.hst-n{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:2.6rem;letter-spacing:-.03em;
+  color:var(--blu);line-height:1;
+}
+.hst-l{font-family:'Syne',sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;}
+.hero-cta{padding-top:32px;display:flex;flex-direction:column;gap:12px;}
+.hero-desc{font-family:'Crimson Pro',serif;font-size:1.05rem;color:rgba(255,255,255,.4);line-height:1.65;margin-bottom:8px;}
+
+/* Bottom strip */
+.hero-strip{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:20px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.hero-strip-l{
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:600;
+  color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;
+}
+.hero-strip-r{
+  display:flex;gap:32px;flex-wrap:wrap;
+}
+.hsr{
+  display:flex;align-items:center;gap:8px;
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:600;
+  color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;
+}
+.hsr-dot{width:5px;height:5px;border-radius:50%;background:var(--blu);}
+
+/* ════ TICKER ════ */
+.ticker{
+  background:var(--blu);overflow:hidden;padding:14px 0;
+}
+.t-track{
+  display:flex;width:max-content;
+  animation:t-sc 24s linear infinite;
+}
+.t-track span{
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.85);padding:0 28px;white-space:nowrap;
+}
+.t-track .sep{color:rgba(255,255,255,.3);padding:0 6px;}
+@keyframes t-sc{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ════ INTRO BLOCK ════ */
+.intro{background:var(--off);padding:110px 0;}
+.intro-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:center;
+}
+.intro-l{}
+.intro-label{
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--mute);
+  margin-bottom:24px;display:flex;align-items:center;gap:10px;
+}
+.intro-label::after{content:'';display:block;width:40px;height:2px;background:var(--blu);}
+.intro-h{color:var(--k);margin-bottom:0;}
+.intro-h em{font-style:italic;color:var(--blu);font-family:'Crimson Pro',serif;font-weight:300;}
+.intro-r{}
+.intro-body{
+  font-family:'Crimson Pro',serif;font-size:1.25rem;color:var(--k2);
+  line-height:1.75;margin-bottom:36px;
+}
+.intro-body strong{font-weight:600;color:var(--k);}
+.intro-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--bord);
+  margin-top:32px;
+}
+.ig{
+  background:var(--w);padding:22px 24px;
+  transition:background .2s;
+}
+.ig:hover{background:var(--slt);}
+.ig-n{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;color:var(--blu);letter-spacing:-.03em;line-height:1;margin-bottom:5px;}
+.ig-l{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;color:var(--mute);letter-spacing:.1em;text-transform:uppercase;}
+
+/* ════ MENU SECTION ════ */
+.menu-sec{background:var(--w);padding:110px 0;}
+.sec-hd{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  border-bottom:3px solid var(--k);padding-bottom:24px;margin-bottom:0;
+  flex-wrap:wrap;gap:20px;
+}
+.sec-hd-r{
+  font-family:'Crimson Pro',serif;font-style:italic;
+  font-size:1.1rem;color:var(--mute);max-width:300px;text-align:right;line-height:1.6;
+}
+
+/* TABS */
+.tabs{
+  display:flex;border-bottom:1px solid var(--bord);
+  overflow-x:auto;margin-bottom:0;
+}
+.tabs::-webkit-scrollbar{height:2px;}
+.tabs::-webkit-scrollbar-thumb{background:var(--bord);}
+.tab{
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:18px 24px;cursor:pointer;border:none;background:none;color:var(--mute);
+  position:relative;white-space:nowrap;transition:color .2s;
+}
+.tab:hover{color:var(--k);}
+.tab::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--blu);transform:scaleX(0);transition:transform .2s;}
+.tab.on{color:var(--k);}
+.tab.on::after{transform:scaleX(1);}
+
+/* MENU ROWS */
+.mlist{border-bottom:1px solid var(--bord);}
+.mrow{
+  display:grid;grid-template-columns:80px 1fr auto;gap:24px;align-items:center;
+  padding:20px 0;border-top:1px solid var(--bord);
+  transition:background .15s;position:relative;cursor:pointer;
+}
+.mrow::before{
+  content:'';position:absolute;left:-48px;right:-48px;top:0;bottom:0;
+  background:var(--slt);opacity:0;transition:opacity .18s;
+}
+.mrow:hover::before{opacity:1;}
+.mrow>*{position:relative;z-index:1;}
+.mi-img{width:80px;height:64px;overflow:hidden;flex-shrink:0;}
+.mi-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.mrow:hover .mi-img img{transform:scale(1.1);}
+.mi-name{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:clamp(1rem,1.6vw,1.3rem);color:var(--k);margin-bottom:4px;letter-spacing:-.01em;
+}
+.mi-desc{font-family:'Crimson Pro',serif;font-size:1rem;color:var(--mute);line-height:1.5;}
+.mi-tags{display:flex;gap:4px;margin-top:6px;}
+.mtag{
+  padding:2px 8px;font-family:'Syne',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+}
+.mtag-b{background:var(--slt);color:var(--blu);}
+.mtag-r{background:rgba(232,50,30,.08);color:var(--red);}
+.mtag-g{background:rgba(0,184,122,.08);color:var(--grn);}
+.mi-r{text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.mi-price{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;
+  color:var(--k);letter-spacing:-.02em;
+}
+.mi-price small{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:500;color:var(--mute);}
+.mi-price.req{font-family:'Crimson Pro',serif;font-size:1rem;font-style:italic;color:var(--mute);}
+.add-b{
+  padding:8px 18px;background:var(--blu);color:var(--w);
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;
+  transition:all .2s;white-space:nowrap;
+}
+.add-b:hover,.add-b.done{background:var(--red);}
+
+/* ════ FEATURED PHOTO BAND ════ */
+.photo-band{background:var(--k);padding:0;overflow:hidden;}
+.pb-inner{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;
+  height:420px;
+}
+.pb-cell{
+  overflow:hidden;position:relative;cursor:pointer;
+}
+.pb-cell img{width:100%;height:100%;object-fit:cover;transition:transform .5s,opacity .3s;opacity:.65;}
+.pb-cell:hover img{transform:scale(1.06);opacity:.9;}
+.pb-cell-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,.8) 0%,transparent 60%);}
+.pb-cell-n{
+  position:absolute;bottom:0;left:0;right:0;
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);
+  padding:20px 18px;z-index:1;
+}
+.pb-cell::before{
+  content:'';position:absolute;top:0;bottom:0;right:0;
+  width:1px;background:rgba(255,255,255,.08);z-index:2;
+}
+.pb-cell:last-child::before{display:none;}
+
+/* ════ SHOP ════ */
+.shop-sec{background:var(--off);padding:110px 0;}
+.shop-filter{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin-top:28px;margin-bottom:44px;
+}
+.sf{
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:9px 20px;cursor:pointer;border:2px solid var(--bord);
+  background:none;color:var(--mute);transition:all .2s;
+}
+.sf:hover{color:var(--k);border-color:var(--k);}
+.sf.on{background:var(--k);color:var(--w);border-color:var(--k);}
+
+.pgrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:2px;
+  background:var(--bord);
+}
+.pcard{
+  background:var(--w);
+  transition:transform .28s;
+  position:relative;overflow:hidden;
+}
+.pcard:hover{transform:translateY(-4px);z-index:1;box-shadow:0 20px 56px rgba(10,10,15,.14);}
+.pcard-img{height:200px;overflow:hidden;position:relative;}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .45s;}
+.pcard:hover .pcard-img img{transform:scale(1.06);}
+.pcard-flag{
+  position:absolute;top:0;left:0;
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 14px;
+}
+.pf-b{background:var(--blu);color:var(--w);}
+.pf-r{background:var(--red);color:var(--w);}
+.pf-k{background:var(--k);color:var(--w);}
+.pcard-body{padding:18px 20px 22px;}
+.pcard-cat{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--blu);margin-bottom:6px;
+}
+.pcard-name{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;
+  color:var(--k);line-height:1.25;margin-bottom:14px;letter-spacing:-.01em;
+}
+.pcard-ft{display:flex;align-items:center;justify-content:space-between;}
+.pcard-price{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;
+  color:var(--k);letter-spacing:-.02em;
+}
+.pcard-price small{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:500;color:var(--mute);}
+.pcard-price.req{font-family:'Crimson Pro',serif;font-size:.9rem;font-style:italic;color:var(--mute);}
+.padd{
+  width:34px;height:34px;background:var(--k);color:var(--w);
+  border:none;cursor:pointer;font-size:1.2rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;flex-shrink:0;
+}
+.padd:hover,.padd.done{background:var(--blu);}
+
+/* ════ BOOKING ════ */
+.book-sec{background:var(--k);padding:110px 0;position:relative;overflow:hidden;}
+/* Big BG text */
+.book-sec-bg{
+  position:absolute;
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(12rem,28vw,38rem);
+  letter-spacing:-.05em;line-height:.85;
+  color:rgba(0,71,255,.06);
+  bottom:-5%;left:-3%;pointer-events:none;z-index:0;user-select:none;
+}
+.book-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;
+}
+
+.book-l .pill-dot{background:var(--blu);}
+.book-l h2{color:var(--w);margin-bottom:36px;}
+.book-l h2 em{font-style:italic;color:var(--blu);font-family:'Crimson Pro',serif;font-weight:300;}
+
+.binfo-list{display:flex;flex-direction:column;gap:2px;margin-bottom:36px;background:rgba(255,255,255,.05);}
+.binfo{
+  display:flex;gap:18px;align-items:flex-start;padding:20px 22px;
+  background:rgba(255,255,255,.03);transition:background .2s;border-left:3px solid transparent;
+}
+.binfo:hover{background:rgba(0,71,255,.08);border-left-color:var(--blu);}
+.binfo-ico{font-size:1.2rem;flex-shrink:0;margin-top:2px;}
+.binfo-l{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:4px;}
+.binfo-v{font-family:'Syne',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,.65);line-height:1.55;}
+.binfo-v a{color:var(--blu);}
+
+/* FORM */
+.bform{background:var(--w);padding:44px 44px;}
+.bform-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1.8rem;letter-spacing:-.02em;color:var(--k);margin-bottom:6px;
+}
+.bform-sub{font-family:'Crimson Pro',serif;font-size:1rem;color:var(--mute);margin-bottom:28px;font-style:italic;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.fgrid.one{grid-template-columns:1fr;}
+.fg{display:flex;flex-direction:column;gap:6px;}
+.fl{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);}
+.fi,.fs{
+  padding:13px 14px;background:var(--off);
+  border:2px solid transparent;color:var(--k);
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:500;
+  outline:none;transition:border-color .2s;-webkit-appearance:none;width:100%;
+}
+.fi:focus,.fs:focus{border-color:var(--blu);}
+.fi::placeholder{color:var(--mute);}
+.fs option{background:var(--w);color:var(--k);}
+.bsubmit{
+  width:100%;margin-top:22px;padding:16px;
+  background:var(--blu);color:var(--w);
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  border:none;cursor:pointer;transition:all .22s;
+}
+.bsubmit:hover{background:var(--blu2);box-shadow:0 10px 32px rgba(0,71,255,.4);}
+
+/* ════ EVENTS ════ */
+.events-sec{background:var(--w);padding:110px 0;}
+.events-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  background:var(--bord);margin-top:48px;
+}
+.ecard{
+  background:var(--w);transition:transform .25s;overflow:hidden;
+}
+.ecard:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(10,10,15,.12);}
+.ecard-img{height:200px;overflow:hidden;position:relative;}
+.ecard-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.ecard:hover .ecard-img img{transform:scale(1.05);}
+.ecard-flag{
+  position:absolute;top:16px;right:16px;
+  background:var(--k);color:var(--w);
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 12px;
+}
+.ecard-body{padding:24px 24px 28px;}
+.ecard-when{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blu);margin-bottom:8px;
+}
+.ecard-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--k);margin-bottom:8px;letter-spacing:-.02em;}
+.ecard-desc{font-family:'Crimson Pro',serif;font-size:1.05rem;color:var(--mute);line-height:1.6;}
+
+/* ════ CART FAB ════ */
+.cart-fab{
+  position:fixed;bottom:32px;right:32px;z-index:350;
+  display:flex;align-items:center;gap:10px;
+  padding:14px 26px;
+  background:var(--blu);color:var(--w);
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;border:none;
+  box-shadow:0 8px 32px rgba(0,71,255,.4);
+  transition:all .25s;
+  opacity:0;pointer-events:none;transform:translateY(12px);
+}
+.cart-fab.vis{opacity:1;pointer-events:all;transform:translateY(0);}
+.cart-fab:hover{background:var(--red);box-shadow:0 12px 40px rgba(232,50,30,.4);transform:translateY(-2px);}
+.fab-n{
+  background:var(--w);color:var(--blu);
+  width:20px;height:20px;
+  font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+}
+.cart-fab.vis .fab-n{color:var(--blu);}
+.cart-fab:hover .fab-n{color:var(--red);}
+
+/* ════ CART DRAWER ════ */
+.co{position:fixed;inset:0;z-index:500;background:rgba(10,10,15,.6);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s;}
+.co.open{opacity:1;pointer-events:all;}
+.cd{
+  position:fixed;top:0;right:0;bottom:0;width:440px;max-width:100vw;z-index:501;
+  background:var(--w);display:flex;flex-direction:column;
+  transform:translateX(110%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.cd.open{transform:translateX(0);}
+.cd-hd{
+  padding:24px 32px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:3px solid var(--k);
+}
+.cd-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;letter-spacing:-.02em;color:var(--k);}
+.cd-x{width:34px;height:34px;background:var(--k);color:var(--w);border:none;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.cd-x:hover{background:var(--red);}
+.cd-body{flex:1;overflow-y:auto;padding:20px 32px;}
+.cd-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;text-align:center;}
+.cd-empty-ico{font-size:3rem;opacity:.25;}
+.cd-empty h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:-.02em;color:var(--k);}
+.cd-empty p{font-family:'Crimson Pro',serif;font-size:1rem;font-style:italic;color:var(--mute);}
+.cd-item{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--bord);}
+.ci-img{width:60px;height:48px;overflow:hidden;flex-shrink:0;}
+.ci-img img{width:100%;height:100%;object-fit:cover;}
+.ci-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;color:var(--k);margin-bottom:3px;line-height:1.2;}
+.ci-p{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--blu);}
+.ci-qty{display:flex;align-items:center;gap:10px;margin-top:7px;}
+.qb{width:26px;height:26px;background:var(--off);border:none;cursor:pointer;font-size:.9rem;color:var(--k);display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.qb:hover{background:var(--slt);}
+.qv{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;min-width:20px;text-align:center;}
+.qrm{background:none;border:none;cursor:pointer;color:var(--mute);font-size:.9rem;padding:4px;transition:color .2s;margin-left:auto;}
+.qrm:hover{color:var(--red);}
+.cd-foot{padding:20px 32px;border-top:3px solid var(--k);}
+.cd-tot{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;}
+.cd-tot-l{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);}
+.cd-tot-v{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;letter-spacing:-.03em;color:var(--k);}
+.cd-note textarea{width:100%;padding:11px 13px;background:var(--off);border:2px solid transparent;color:var(--k);font-family:'Syne',sans-serif;font-size:13px;font-weight:500;resize:none;height:68px;outline:none;transition:border-color .2s;margin-bottom:12px;}
+.cd-note textarea:focus{border-color:var(--blu);}
+.cd-note textarea::placeholder{color:var(--mute);}
+.cd-order{width:100%;padding:15px;background:var(--blu);color:var(--w);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;transition:all .22s;}
+.cd-order:hover{background:var(--red);}
+
+/* ════ FOOTER ════ */
+.footer{background:var(--k2);padding:76px 0 44px;}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:56px;margin-bottom:56px;}
+.ft-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;color:var(--w);margin-bottom:14px;}
+.ft-logo span{color:var(--blu);}
+.ft-desc{font-family:'Crimson Pro',serif;font-size:1rem;color:rgba(255,255,255,.4);line-height:1.7;max-width:240px;margin-bottom:24px;}
+.ft-soc{display:flex;gap:2px;}
+.fsoc{width:34px;height:34px;background:rgba(255,255,255,.06);border:none;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);transition:all .2s;cursor:pointer;}
+.fsoc:hover{background:var(--blu);color:var(--w);}
+.ft-col h4{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:18px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-col ul a{font-family:'Syne',sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,.45);transition:color .2s;}
+.ft-col ul a:hover{color:var(--w);}
+.ft-bot{padding-top:28px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.ft-bot p{font-family:'Syne',sans-serif;font-size:11px;color:rgba(255,255,255,.2);}
+.ft-legal{display:flex;gap:20px;}
+.ft-legal a{font-family:'Syne',sans-serif;font-size:11px;color:rgba(255,255,255,.2);transition:color .2s;}
+.ft-legal a:hover{color:rgba(255,255,255,.5);}
+
+/* ════ TOAST ════ */
+.toast{
+  position:fixed;bottom:100px;left:50%;z-index:600;
+  transform:translateX(-50%) translateY(16px);
+  background:var(--k);color:var(--w);
+  padding:12px 28px;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:.06em;
+  display:flex;align-items:center;gap:10px;
+  opacity:0;pointer-events:none;transition:all .3s;
+  box-shadow:0 8px 32px rgba(10,10,15,.4);white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.t-d{width:6px;height:6px;background:var(--blu);flex-shrink:0;}
+
+/* ════ REVEAL ════ */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+.rv.in{opacity:1;transform:none;}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* ════ RESPONSIVE ════ */
+@media(max-width:1100px){
+  .hero-cols{grid-template-columns:1.08fr .92fr;}
+  .hero-col1{padding-right:32px;}
+  .hero-col3{padding-left:32px;}
+  .hero-col2{display:none;}
+  .intro-inner{grid-template-columns:1fr;gap:48px;}
+  .book-inner{grid-template-columns:1fr;gap:48px;}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:40px;}
+  .pb-inner{grid-template-columns:1fr 1fr 1fr;height:340px;}
+  .pb-cell:nth-child(4),.pb-cell:nth-child(5){display:none;}
+  .events-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  nav,.hdr-r .btn,.hdr-tel{display:none;}
+  .ham{display:flex;}
+  .hdr{
+    height:64px;
+    padding:0 16px;
+    gap:12px;
+  }
+  .logo{
+    font-size:.98rem;
+    white-space:nowrap;
+    flex-shrink:1;
+    min-width:0;
+  }
+  .hdr-r{gap:0;flex-shrink:0;}
+  .container{padding:0 16px;}
+  .mob{
+    inset:64px 0 0 0;
+    z-index:395;
+    padding:18px 20px 28px;
+    overflow-y:auto;
+  }
+  .mob a{
+    font-size:clamp(1.6rem,8vw,2.5rem);
+    line-height:1;
+    padding:16px 0;
+  }
+  .mob-ft{
+    margin-top:24px;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.08);
+    gap:10px;
+  }
+  .mob-ft a{
+    font-size:13px;
+    color:rgba(255,255,255,.62);
+  }
+
+  .hero{
+    min-height:auto;
+    padding-top:64px;
+  }
+  .hero-bg-n{
+    font-size:clamp(12rem,62vw,20rem);
+    top:0;
+    right:-10%;
+  }
+  .hero-content{padding:0 16px;}
+  .hero-cols{grid-template-columns:1fr;}
+  .hero-col{
+    padding:22px 0;
+    border-right:none;
+  }
+  .hero-col1{
+    padding:28px 0 18px;
+  }
+  .hero-eyebrow{
+    margin-bottom:16px;
+    font-size:10px;
+    gap:10px;
+  }
+  .hero-eyebrow::before{width:22px;}
+  .hero-h{
+    font-size:clamp(2.8rem,14vw,4.8rem);
+    line-height:.9;
+  }
+  .hero-col2{display:none;}
+  .hero-col3{
+    display:flex;
+    padding:4px 0 26px;
+    gap:22px;
+  }
+  .hero-open-inline{font-size:10px;padding:8px 12px;}
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+  .hst{
+    padding:14px 14px 12px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.03);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+  }
+  .hst:first-child{border-top:1px solid rgba(255,255,255,.1);}
+  .hst-n{font-size:2rem;}
+  .hst-l{
+    font-size:10px;
+    line-height:1.35;
+  }
+  .hero-cta{
+    padding-top:0;
+    gap:12px;
+  }
+  .hero-desc{
+    font-size:1rem;
+    line-height:1.55;
+    color:rgba(255,255,255,.7);
+    margin-bottom:0;
+  }
+  .hero-cta .btn{
+    width:100%;
+    justify-content:center;
+  }
+  .hero-strip{
+    padding:14px 16px 18px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .hero-strip-r{
+    gap:10px;
+    flex-direction:column;
+  }
+  .hsr{
+    font-size:10px;
+    letter-spacing:.08em;
+  }
+
+  .sec-hd{
+    align-items:flex-start;
+    padding-bottom:18px;
+  }
+  .sec-hd-r{
+    max-width:none;
+    text-align:left;
+    font-size:1rem;
+  }
+  .tabs{
+    gap:0;
+    margin:0 -16px;
+    padding:0 16px;
+    scroll-padding-left:16px;
+  }
+  .tab{padding:14px 16px;font-size:11px;}
+
+  .mrow{grid-template-columns:64px 1fr;gap:14px;}
+  .mi-r{display:none;}
+  .pb-inner{grid-template-columns:1fr 1fr;height:280px;}
+  .pb-cell:nth-child(3){display:none;}
+  .pgrid{grid-template-columns:repeat(2,1fr);}
+  .bform{padding:28px 22px;}
+  .fgrid{grid-template-columns:1fr;}
+  .ft-grid{grid-template-columns:1fr;gap:28px;}
+  .ft-bot{flex-direction:column;align-items:flex-start;}
+  .ft-legal{flex-direction:column;gap:8px;}
+  .cart-fab{bottom:18px;right:16px;left:16px;justify-content:center;}
+  .cd{width:100vw;}
+  .events-grid{grid-template-columns:1fr;}
+  .intro-h{font-size:clamp(2rem,10vw,4rem);}
+}
+@media(max-width:480px){
+  .logo{font-size:.9rem;}
+  .mob{padding:16px 16px 24px;}
+  .mob a{font-size:1.45rem;}
+  .hero-h{font-size:clamp(2.55rem,13vw,4.1rem);}
+  .hero-stats{grid-template-columns:1fr 1fr;}
+  .hst{padding:12px;}
+  .hst-n{font-size:1.7rem;}
+  .pgrid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ HEADER ══════ -->
+<header class="hdr" id="hdr">
+  <a href="#" class="logo">IKRA<span class="logo-blu">da</span>KRAB<div class="logo-dot"></div></a>
+  <nav>
+    <a href="#menu">Меню</a>
+    <a href="#shop">Магазин</a>
+    <a href="#booking">Бронь</a>
+    <a href="#events">События</a>
+  </nav>
+  <div class="hdr-r">
+    <a href="tel:+79923116970" class="hdr-tel">+7 (992) 311-69-70</a>
+    <a href="#booking" class="btn btn-blu" style="padding:10px 22px;font-size:11px">Столик →</a>
+    <button class="ham" id="ham"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mob" id="mob">
+  <a href="#menu" onclick="closeMob()">Меню</a>
+  <a href="#shop" onclick="closeMob()">Магазин</a>
+  <a href="#booking" onclick="closeMob()">Бронирование</a>
+  <a href="#events" onclick="closeMob()">События</a>
+  <div class="mob-ft">
+    <a href="tel:+79923116970">+7 (992) 311-69-70</a>
+    <a href="https://t.me/ikradakrab" target="_blank">Telegram @ikradakrab</a>
+  </div>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero" id="home">
+  <div class="hero-bg-n">海</div>
+
+  <div class="hero-content">
+    <div class="hero-cols">
+      <!-- Col 1 -->
+      <div class="hero-col hero-col1">
+        <div>
+          <div class="hero-eyebrow">Морское кафе · Тюмень · 2018</div>
+          <div class="hero-h">
+            <span>МОР<span class="accent">СКОЕ</span></span>
+            <span>КАФЕ</span>
+            <span class="italic">с прямыми поставками</span>
+          </div>
+          <div style="margin-top:36px;display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="#menu" class="btn btn-blu">Смотреть меню</a>
+            <a href="#booking" class="btn btn-outline-w">Забронировать</a>
+          </div>
+        </div>
+      </div>
+      <!-- Col 3 -->
+      <div class="hero-col hero-col3">
+        <div class="hero-stats">
+          <div class="hst"><span class="hst-n">7</span><span class="hst-l">лет опыта</span></div>
+          <div class="hst"><span class="hst-n">40</span><span class="hst-l">мест в зале</span></div>
+          <div class="hst"><span class="hst-n">48ч</span><span class="hst-l">от Камчатки</span></div>
+          <div class="hst"><span class="hst-n">5★</span><span class="hst-l">рейтинг</span></div>
+        </div>
+        <div class="hero-cta">
+          <div class="hero-open-inline">Открыто с 08:00</div>
+          <p class="hero-desc">Камчатский краб, красная икра, живые устрицы — прямые поставки через собственную сеть IkraDaKrab. Свежее каждый день.</p>
+          <a href="tel:+79923116970" class="btn btn-red">Позвонить</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-strip">
+    <span class="hero-strip-l">Тюмень · ул. Республики, 59</span>
+    <div class="hero-strip-r">
+      <span class="hsr"><span class="hsr-dot"></span>Пн–Чт: 08:00–23:00</span>
+      <span class="hsr"><span class="hsr-dot"></span>Пт–Вс: 08:00–01:00</span>
+      <span class="hsr"><span class="hsr-dot"></span>Доставка 60 мин</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ TICKER ══════ -->
+<div class="ticker">
+  <div class="t-track">
+    <span>Камчатский краб</span><span class="sep">/</span>
+    <span>Красная икра</span><span class="sep">/</span>
+    <span>Живые устрицы</span><span class="sep">/</span>
+    <span>Тигровые креветки</span><span class="sep">/</span>
+    <span>Нерка Сахалин</span><span class="sep">/</span>
+    <span>Гребешок</span><span class="sep">/</span>
+    <span>Чавыча</span><span class="sep">/</span>
+    <span>Сибас</span><span class="sep">/</span>
+    <span>Камчатский краб</span><span class="sep">/</span>
+    <span>Красная икра</span><span class="sep">/</span>
+    <span>Живые устрицы</span><span class="sep">/</span>
+    <span>Тигровые креветки</span><span class="sep">/</span>
+    <span>Нерка Сахалин</span><span class="sep">/</span>
+    <span>Гребешок</span><span class="sep">/</span>
+    <span>Чавыча</span><span class="sep">/</span>
+    <span>Сибас</span><span class="sep">/</span>
+  </div>
+</div>
+
+<!-- ══════ INTRO ══════ -->
+<section class="intro">
+  <div class="container">
+    <div class="intro-inner">
+      <div class="rv">
+        <div class="intro-label">О нас</div>
+        <h2 class="intro-h">Море<br><em>без</em><br>посред<br>ников</h2>
+      </div>
+      <div class="rv d2">
+        <p class="intro-body">Мы — собственное кафе сети <strong>IkraDaKrab</strong>. Всё что лежит на вашей тарелке приезжает напрямую с Камчатки, Сахалина и Баренцева моря. Никаких оптовиков, никаких полугодовых заморозок.</p>
+        <p class="intro-body" style="font-size:1rem;color:var(--mute);">Авторская кухня шефа, живой джаз по пятницам, устричные воскресенья — всё на Республики, 59.</p>
+        <div class="intro-grid">
+          <div class="ig"><div class="ig-n">300+</div><div class="ig-l">позиций в магазине</div></div>
+          <div class="ig"><div class="ig-n">48ч</div><div class="ig-l">от вылова до стола</div></div>
+          <div class="ig"><div class="ig-n">7 лет</div><div class="ig-l">поставок</div></div>
+          <div class="ig"><div class="ig-n">5★</div><div class="ig-l">рейтинг гостей</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ MENU ══════ -->
+<section class="menu-sec" id="menu">
+  <div class="container">
+    <div class="sec-hd rv">
+      <div>
+        <div class="pill"><span class="pill-dot"></span>Кухня кафе</div>
+        <h2>Меню</h2>
+      </div>
+      <div class="sec-hd-r">Сезонные блюда из свежих<br>морепродуктов. Заказ → Telegram</div>
+    </div>
+    <div class="tabs rv d1" id="menuTabs">
+      <button class="tab on" data-c="all">Всё меню</button>
+      <button class="tab" data-c="zavtrak">Завтраки</button>
+      <button class="tab" data-c="zakuski">Закуски</button>
+      <button class="tab" data-c="main">Горячее</button>
+      <button class="tab" data-c="sushi">Суши</button>
+      <button class="tab" data-c="soupy">Супы</button>
+      <button class="tab" data-c="deserty">Десерты</button>
+      <button class="tab" data-c="napitki">Напитки</button>
+    </div>
+    <div class="mlist rv d2" id="menuList"></div>
+  </div>
+</section>
+
+<!-- ══════ PHOTO BAND ══════ -->
+<div class="photo-band">
+  <div class="pb-inner">
+    <div class="pb-cell"><img src="https://static.tildacdn.com/stor3130-3439-4039-b031-653338613032/88976407.jpg" alt="Краб" loading="lazy"><div class="pb-cell-overlay"></div><div class="pb-cell-n">Камчатский краб</div></div>
+    <div class="pb-cell"><img src="https://static.tildacdn.com/stor6630-6234-4638-a435-333838623266/57977210.jpg" alt="Икра" loading="lazy"><div class="pb-cell-overlay"></div><div class="pb-cell-n">Красная икра</div></div>
+    <div class="pb-cell"><img src="https://static.tildacdn.com/stor3933-3734-4637-b561-343762383965/76571870.jpg" alt="Рыба" loading="lazy"><div class="pb-cell-overlay"></div><div class="pb-cell-n">Чавыча premium</div></div>
+    <div class="pb-cell"><img src="https://static.tildacdn.com/stor3136-3336-4232-b730-663064633830/90571890.jpg" alt="Медведка" loading="lazy"><div class="pb-cell-overlay"></div><div class="pb-cell-n">Медведка</div></div>
+    <div class="pb-cell"><img src="https://static.tildacdn.com/stor3161-6263-4133-a666-386261346461/79564463.jpg" alt="Лангустины" loading="lazy"><div class="pb-cell-overlay"></div><div class="pb-cell-n">Лангустины</div></div>
+  </div>
+</div>
+
+<!-- ══════ SHOP ══════ -->
+<section class="shop-sec" id="shop">
+  <div class="container">
+    <div class="rv">
+      <div class="sec-hd">
+        <div>
+          <div class="pill"><span class="pill-dot red"></span>Прямые поставки</div>
+          <h2>Магазин</h2>
+        </div>
+        <div class="sec-hd-r">Тот же продукт, что на нашей кухне —<br>теперь можно купить домой</div>
+      </div>
+    </div>
+    <div class="shop-filter rv d1" id="shopFilter">
+      <button class="sf on" data-c="all">Всё</button>
+      <button class="sf" data-c="ikra">Икра</button>
+      <button class="sf" data-c="krab">Крабы</button>
+      <button class="sf" data-c="ryba">Рыба</button>
+      <button class="sf" data-c="krevetki">Креветки</button>
+      <button class="sf" data-c="mollyuski">Моллюски</button>
+      <button class="sf" data-c="polufab">Полуфабрикаты</button>
+    </div>
+    <div class="pgrid rv d2" id="shopGrid"></div>
+  </div>
+</section>
+
+<!-- ══════ BOOKING ══════ -->
+<section class="book-sec" id="booking">
+  <div class="book-sec-bg">БРОНЬ</div>
+  <div class="container">
+    <div class="book-inner">
+      <div class="book-l rv">
+        <div class="pill"><span class="pill-dot"></span>Резервация</div>
+        <h2>Забронировать<br><em>ваш столик</em></h2>
+        <div class="binfo-list">
+          <div class="binfo"><div class="binfo-ico">📍</div><div><div class="binfo-l">Адрес</div><div class="binfo-v">Тюмень, ул. Республики, 59<br><small style="color:rgba(255,255,255,.25)">Вход со стороны набережной</small></div></div></div>
+          <div class="binfo"><div class="binfo-ico">🕐</div><div><div class="binfo-l">Часы работы</div><div class="binfo-v">Пн–Чт: 08:00 – 23:00<br>Пт–Вс: 08:00 – 01:00</div></div></div>
+          <div class="binfo"><div class="binfo-ico">📞</div><div><div class="binfo-l">Телефон</div><div class="binfo-v"><a href="tel:+79923116970">+7 (992) 311-69-70</a></div></div></div>
+          <div class="binfo"><div class="binfo-ico">🚀</div><div><div class="binfo-l">Доставка</div><div class="binfo-v">Горячее по Тюмени за 60 мин.<br>Продукты — курьер или самовывоз</div></div></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="tel:+79923116970" class="btn btn-blu">Позвонить</a>
+          <a href="https://t.me/ikradakrab" class="btn btn-outline-w" target="_blank">Telegram</a>
+        </div>
+      </div>
+      <div class="rv d2">
+        <div class="bform">
+          <div class="bform-title">Бронирование стола</div>
+          <div class="bform-sub">Подтвердим в течение 15 минут через Telegram или звонком</div>
+          <div class="fgrid">
+            <div class="fg"><label class="fl">Имя</label><input class="fi" type="text" placeholder="Ваше имя" id="bName"></div>
+            <div class="fg"><label class="fl">Телефон</label><input class="fi" type="tel" placeholder="+7 (___) ___-__-__" id="bPhone"></div>
+          </div>
+          <div class="fgrid">
+            <div class="fg"><label class="fl">Дата</label><input class="fi" type="date" id="bDate"></div>
+            <div class="fg"><label class="fl">Время</label>
+              <select class="fs" id="bTime"><option value="">Выбрать</option><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option><option>20:00</option><option>21:00</option><option>22:00</option></select>
+            </div>
+          </div>
+          <div class="fgrid">
+            <div class="fg"><label class="fl">Гостей</label>
+              <select class="fs" id="bGuests"><option>1 гость</option><option>2 гостя</option><option>3 гостя</option><option>4 гостя</option><option>5 гостей</option><option>6 гостей</option><option>7–10 гостей</option><option>Банкет 10+</option></select>
+            </div>
+            <div class="fg"><label class="fl">Повод</label>
+              <select class="fs" id="bOcc"><option>Обычный ужин</option><option>Романтический</option><option>День рождения</option><option>Деловой обед</option><option>Корпоратив</option></select>
+            </div>
+          </div>
+          <div class="fgrid one">
+            <div class="fg"><label class="fl">Пожелания</label><input class="fi" type="text" placeholder="Аллергии, предпочтения по столику…" id="bNote"></div>
+          </div>
+          <button class="bsubmit" onclick="doBook()">Отправить заявку →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ EVENTS ══════ -->
+<section class="events-sec" id="events">
+  <div class="container">
+    <div class="rv">
+      <div class="sec-hd">
+        <div>
+          <div class="pill"><span class="pill-dot"></span>Мероприятия</div>
+          <h2>События</h2>
+        </div>
+      </div>
+    </div>
+    <div class="events-grid rv d1">
+      <div class="ecard">
+        <div class="ecard-img"><img src="https://static.tildacdn.com/stor3966-3533-4765-a131-356532343738/76270015.jpg" alt="Джаз" loading="lazy"><div class="ecard-flag">Пт & Сб</div></div>
+        <div class="ecard-body"><div class="ecard-when">Пятница & суббота с 20:00</div><div class="ecard-name">Живой джаз</div><div class="ecard-desc">Авторская музыка и атмосфера морского клуба. Специальное джазовое меню вечером.</div></div>
+      </div>
+      <div class="ecard">
+        <div class="ecard-img"><img src="https://static.tildacdn.com/stor3131-3830-4464-a236-313163333233/48681780.jpg" alt="Устрицы" loading="lazy"><div class="ecard-flag">Вс</div></div>
+        <div class="ecard-body"><div class="ecard-when">Каждое воскресенье</div><div class="ecard-name">Устричный Sunday</div><div class="ecard-desc">Устрицы Fine de Claire по специальной цене. Шампанское и сет на двоих от шефа.</div></div>
+      </div>
+      <div class="ecard">
+        <div class="ecard-img"><img src="https://static.tildacdn.com/stor3130-3439-4039-b031-653338613032/88976407.jpg" alt="Шеф" loading="lazy"><div class="ecard-flag">По записи</div></div>
+        <div class="ecard-body"><div class="ecard-when">По записи</div><div class="ecard-name">Ужин с шефом</div><div class="ecard-desc">7 подач, история каждого блюда, вино от сомелье. Записаться можно через Telegram.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="ft-grid">
+      <div>
+        <div class="ft-logo">IKRA<span>da</span>KRAB</div>
+        <p class="ft-desc">Авторское кафе из свежих морепродуктов в Тюмени. Прямые поставки IkraDaKrab с Камчатки и Дальнего Востока.</p>
+        <div class="ft-soc">
+          <a href="https://t.me/ikradakrab" class="fsoc" target="_blank" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="currentColor"><path d="M13.2 2.3L1.1 6.8c-.8.3-.8.8-.1 1l3 1 1.1 3.6c.2.4.3.5.6.5.3 0 .4-.1.6-.3l1.4-1.4 2.9 2.1c.6.3.9.1 1-.5l1.8-8.5c.2-.7-.3-1-.9-.5z"/></svg>
+          </a>
+          <a href="https://vk.com/ikradakrab" class="fsoc" target="_blank" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="currentColor"><path d="M7.5 1C3.9 1 1 3.9 1 7.5S3.9 14 7.5 14 14 11.1 14 7.5 11.1 1 7.5 1zm3.4 9H9.4c-.3 0-.4-.1-.7-.4L7.4 8.2l-.3.3v1.5H5.7c-.9 0-1.7-.5-2.2-1.4-.7-1.1-.6-2.5.4-3.5.5-.5 1.1-.8 1.8-.9H7v1.3h-.8c-.5 0-.9.4-.9.9v.2L6.6 8l.5-3h1.5v.3l-1 2.7 2 2-.4.2v.8z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="ft-col"><h4>Разделы</h4><ul><li><a href="#menu">Меню</a></li><li><a href="#shop">Магазин</a></li><li><a href="#events">События</a></li><li><a href="#booking">Бронирование</a></li></ul></div>
+      <div class="ft-col"><h4>Контакты</h4><ul><li><a href="tel:+79923116970">+7 (992) 311-69-70</a></li><li><a href="#">Республики, 59</a></li><li><a href="https://t.me/ikradakrab" target="_blank">@ikradakrab</a></li><li><a href="https://ikradakrab.ru" target="_blank">ikradakrab.ru</a></li></ul></div>
+      <div class="ft-col"><h4>Часы работы</h4><ul><li><a href="#">Пн–Чт: 08:00 – 23:00</a></li><li><a href="#">Пт–Вс: 08:00 – 01:00</a></li><li><a href="#" style="color:rgba(0,71,255,.7)">Джаз: Пт & Сб с 20:00</a></li><li><a href="#">Устрицы: Вс</a></li></ul></div>
+    </div>
+    <div class="ft-bot">
+      <p>© 2025 IKRAdaKRAB · Тюмень · Все права защищены</p>
+      <div class="ft-legal"><a href="#">Конфиденциальность</a><a href="#">Оферта</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- CART FAB -->
+<button class="cart-fab" id="cartFab" onclick="openCart()">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1.5 1.5h1.5l2 7.5h6L13 4H4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="12.5" r="1" fill="currentColor"/><circle cx="10" cy="12.5" r="1" fill="currentColor"/></svg>
+  Корзина
+  <span class="fab-n" id="fabN">0</span>
+</button>
+
+<!-- CART -->
+<div class="co" id="co" onclick="closeCart()"></div>
+<div class="cd" id="cd">
+  <div class="cd-hd">
+    <div class="cd-title">КОРЗИНА</div>
+    <button class="cd-x" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cd-body" id="cdBody">
+    <div class="cd-empty"><div class="cd-empty-ico">🦐</div><h3>Пусто</h3><p>Добавьте блюда или продукты</p></div>
+  </div>
+  <div class="cd-foot" id="cdFoot" style="display:none">
+    <div class="cd-tot"><span class="cd-tot-l">Итого</span><span class="cd-tot-v" id="cdTot">0 ₽</span></div>
+    <div class="cd-note"><textarea placeholder="Адрес, комментарий, аллергии…" id="cNote"></textarea></div>
+    <button class="cd-order" onclick="placeOrder()">Оформить → Telegram</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="t-d"></span><span id="toastMsg"></span></div>
+
+<script>
+/* ── HEADER ── */
+const hdr = document.getElementById('hdr');
+addEventListener('scroll', () => hdr.classList.toggle('on', scrollY > 60), {passive:true});
+
+/* ── MOB ── */
+const ham = document.getElementById('ham');
+const mob = document.getElementById('mob');
+
+ham.addEventListener('click', () => {
+  const isOpen = mob.classList.toggle('open');
+  ham.classList.toggle('act', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+function closeMob(){
+  mob.classList.remove('open');
+  ham.classList.remove('act');
+  document.body.style.overflow = '';
+}
+
+addEventListener('resize', () => {
+  if(innerWidth > 768 && mob.classList.contains('open')) closeMob();
+}, {passive:true});
+
+/* ── REVEAL ── */
+const ro = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('in'); ro.unobserve(x.target);} }), {threshold:.08});
+document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+
+/* ── DATA ── */
+const menuData = [
+  {id:1,c:'zavtrak',n:'Бриошь с красной икрой',d:'Крем-чиз, 50г икры кеты, укроп, лимонная цедра',p:1190,img:'https://static.tildacdn.com/stor6630-6234-4638-a435-333838623266/57977210.jpg',t:[['Хит','r']]},
+  {id:2,c:'zavtrak',n:'Яйца Бенедикт с лососем',d:'Пашот, голландский соус, бекон из лосося, авокадо',p:850,img:'https://static.tildacdn.com/stor6161-3863-4537-b331-366334373361/82198959.jpg',t:[]},
+  {id:3,c:'zavtrak',n:'Авокадо-тост с сёмгой',d:'Мультизерновой хлеб, гуакамоле, слабосолёная сёмга',p:790,img:'https://static.tildacdn.com/stor6238-3063-4437-b931-316165303033/53860812.jpg',t:[]},
+  {id:4,c:'zavtrak',n:'Круассан с мясом краба',d:'Слоёный круассан, мясо краба, лимонный айоли, руккола',p:950,img:'https://static.tildacdn.com/stor3966-3533-4765-a131-356532343738/76270015.jpg',t:[['Премиум','b']]},
+  {id:5,c:'zakuski',n:'Устрицы Fine de Claire',d:'6 шт., лимон, миньонет, хлеб с маслом',p:1990,img:'https://static.tildacdn.com/stor3131-3830-4464-a236-313163333233/48681780.jpg',t:[['Хит','r'],['Сырое','g']]},
+  {id:6,c:'zakuski',n:'Тартар из тунца',d:'Авокадо, кунжут, соус юдзу, чипсы тапиока',p:1390,img:'https://static.tildacdn.com/stor6533-3634-4566-b338-306663353837/27425228.jpg',t:[['Сырое','g']]},
+  {id:7,c:'zakuski',n:'Краб темпура',d:'Камчатский краб, sweet chili, айоли с трюфелем',p:2400,img:'https://static.tildacdn.com/stor3130-3439-4039-b031-653338613032/88976407.jpg',t:[['Хит','r']]},
+  {id:8,c:'zakuski',n:'Мидии в белом вине',d:'800г, белое вино, чеснок, тимьян, сливки, фокачча',p:1050,img:'https://static.tildacdn.com/stor3131-3337-4662-a535-343832303161/89041600.jpg',t:[]},
+  {id:9,c:'zakuski',n:'Лангустины гриль',d:'4 шт., масло с лимоном, чеснок, тимьян',p:2200,img:'https://static.tildacdn.com/stor3161-6263-4133-a666-386261346461/79564463.jpg',t:[['Гриль','b']]},
+  {id:10,c:'main',n:'Фаланга камчатского краба',d:'300г, масло юдзу, картофель дофинуа, зелёный соус',p:4800,img:'https://static.tildacdn.com/stor3130-3439-4039-b031-653338613032/88976407.jpg',t:[['Хит','r'],['Премиум','b']]},
+  {id:11,c:'main',n:'Чавыча на кедровой доске',d:'280г, соус тэрияки, рис со шпинатом, мисо-бульон',p:2400,img:'https://static.tildacdn.com/stor3933-3734-4637-b561-343762383965/76571870.jpg',t:[['Авторское','b']]},
+  {id:12,c:'main',n:'Сибас в морской соли',d:'500г, оливковое масло, лимон, прованские травы',p:2200,img:'https://static.tildacdn.com/stor6433-6364-4335-a663-323537366337/76710892.jpg',t:[]},
+  {id:13,c:'main',n:'Ризотто с морепродуктами',d:'Карнарли, тигровые креветки, мидии, кальмар, шафран',p:1580,img:'https://static.tildacdn.com/stor3136-3336-4232-b730-663064633830/90571890.jpg',t:[]},
+  {id:14,c:'main',n:'Палтус с трюфельным маслом',d:'250г стейк, трюфельное масло, спаржа, лимонный соус',p:2650,img:'https://static.tildacdn.com/stor3561-3939-4338-b132-373736393664/54222364.jpg',t:[['Премиум','b']]},
+  {id:15,c:'sushi',n:'Ролл «Камчатка»',d:'Краб, авокадо, огурец, кунжут, унаги (8 шт.)',p:990,img:'https://static.tildacdn.com/stor3966-3533-4765-a131-356532343738/76270015.jpg',t:[['Хит','r']]},
+  {id:16,c:'sushi',n:'Ролл «Тюмень»',d:'Нерка, крем-сыр, икра красная, хрустящий лук (8 шт.)',p:1050,img:'https://static.tildacdn.com/stor6161-3863-4537-b331-366334373361/82198959.jpg',t:[['Авторское','b']]},
+  {id:17,c:'sushi',n:'Нигири ассорти',d:'Лосось, тунец, желтохвост, гребешок, угорь — 10 шт.',p:1550,img:'https://static.tildacdn.com/stor3933-3734-4637-b561-343762383965/76571870.jpg',t:[]},
+  {id:18,c:'sushi',n:'Сет «Море» — 20 шт.',d:'Краб, лосось, тунец, авокадо — 4 вида',p:2400,img:'https://static.tildacdn.com/stor6533-3634-4566-b338-306663353837/27425228.jpg',t:[['Сет','b']]},
+  {id:19,c:'soupy',n:'Биск из омара',d:'Насыщенный бульон, омар, сливки, коньяк, тимьян',p:1400,img:'https://static.tildacdn.com/stor3131-3337-4662-a535-343832303161/89041600.jpg',t:[['Премиум','b']]},
+  {id:20,c:'soupy',n:'Уха из нерки',d:'Янтарный бульон, нерка, картофель, морковь, укроп',p:780,img:'https://static.tildacdn.com/stor6533-3634-4566-b338-306663353837/27425228.jpg',t:[]},
+  {id:21,c:'soupy',n:'Том-ям с морепродуктами',d:'Кокосовое молоко, тигровые креветки, мидии',p:950,img:'https://static.tildacdn.com/stor3136-3336-4232-b730-663064633830/90571890.jpg',t:[['Острый','r']]},
+  {id:22,c:'deserty',n:'Тарт матча с икрой',d:'Ганаш из матча, ложечка красной икры, цитрус',p:680,img:'https://static.tildacdn.com/stor6630-6234-4638-a435-333838623266/57977210.jpg',t:[['Авторское','b']]},
+  {id:23,c:'deserty',n:'Чизкейк «Сахалин»',d:'Желе из морошки, кедровый орех',p:590,img:'https://static.tildacdn.com/stor6161-3863-4537-b331-366334373361/82198959.jpg',t:[]},
+  {id:24,c:'napitki',n:'Краб Мэри',d:'Bloody Mary с крабовым соком, томат, специи',p:750,img:'https://static.tildacdn.com/stor3136-3336-4232-b730-663064633830/90571890.jpg',t:[['Авторское','b']]},
+  {id:25,c:'napitki',n:'Лимонад «Охотское море»',d:'Огурец, базилик, лимон, мёд, содовая',p:390,img:'https://static.tildacdn.com/stor6366-3237-4330-a235-356132656537/81507521.jpg',t:[]},
+  {id:26,c:'napitki',n:'Шабли — бокал',d:'Белое Бургундия — к устрицам',p:850,img:'https://static.tildacdn.com/stor3161-6263-4133-a666-386261346461/79564463.jpg',t:[['Вино','b']]},
+];
+const shopData = [
+  {id:101,c:'ikra',cat:'Икра',n:'Икра кеты "Восточный берег" 240 гр',p:3790,img:'https://static.tildacdn.com/stor6630-6234-4638-a435-333838623266/57977210.jpg',f:'Хит',fc:'pf-r'},
+  {id:102,c:'ikra',cat:'Икра',n:'Икра горбуши "Восточный берег" 125 гр',p:1690,img:'https://static.tildacdn.com/stor6161-3863-4537-b331-366334373361/82198959.jpg',f:'',fc:''},
+  {id:103,c:'ikra',cat:'Икра',n:'Икра кеты',p:0,img:'https://static.tildacdn.com/stor6261-3264-4263-a132-623530306262/10347984.jpg',f:'По запросу',fc:'pf-k'},
+  {id:104,c:'ikra',cat:'Икра',n:'Икра чавычи',p:0,img:'https://static.tildacdn.com/stor6366-3237-4330-a235-356132656537/81507521.jpg',f:'Премиум',fc:'pf-k'},
+  {id:105,c:'ikra',cat:'Икра',n:'Икра осетровая "Exclusive"',p:0,img:'https://static.tildacdn.com/stor3137-3435-4738-a566-303861356430/93206907.jpg',f:'Exclusive',fc:'pf-b'},
+  {id:106,c:'krab',cat:'Краб',n:'Мясо краба волосатика',p:3960,img:'https://static.tildacdn.com/stor3735-6465-4563-a634-393236393937/28485513.jpg',f:'',fc:''},
+  {id:107,c:'krab',cat:'Краб',n:'Фаланга краба Стригуна (Опилио) 1 кг',p:5950,img:'https://static.tildacdn.com/stor3130-3439-4039-b031-653338613032/88976407.jpg',f:'Хит',fc:'pf-r'},
+  {id:108,c:'krab',cat:'Краб',n:'Фаланга первая 14+ камчатского краба 500г',p:5250,img:'https://static.tildacdn.com/stor6265-3666-4364-a166-613236343062/96001501.jpg',f:'Премиум',fc:'pf-k'},
+  {id:109,c:'krab',cat:'Краб',n:'Первая фаланга "ЭКСТРА" уп. 1 кг',p:10490,img:'https://static.tildacdn.com/stor3130-3439-4039-b031-653338613032/88976407.jpg',f:'Экстра',fc:'pf-b'},
+  {id:110,c:'ryba',cat:'Рыба',n:'Семга кусок',p:2650,img:'https://static.tildacdn.com/stor6535-3933-4938-a330-366636656335/33005715.jpg',f:'',fc:''},
+  {id:111,c:'ryba',cat:'Рыба',n:'Филе чавычи слабосолёное "Premium"',p:3950,img:'https://static.tildacdn.com/stor3933-3734-4637-b561-343762383965/76571870.jpg',f:'Премиум',fc:'pf-k'},
+  {id:112,c:'ryba',cat:'Рыба',n:'Гриль Дорадо (маринованная)',p:1750,img:'https://static.tildacdn.com/stor6130-6236-4461-a239-616532376239/85960373.jpg',f:'Готово',fc:'pf-k'},
+  {id:113,c:'ryba',cat:'Рыба',n:'Гриль Сибас',p:1690,img:'https://static.tildacdn.com/stor6433-6364-4335-a663-323537366337/76710892.jpg',f:'',fc:''},
+  {id:114,c:'ryba',cat:'Рыба',n:'Форель охлажд. Баренцево море',p:1750,img:'https://static.tildacdn.com/stor3735-6165-4238-b639-363833343262/49466026.jpg',f:'',fc:''},
+  {id:115,c:'krevetki',cat:'Креветки',n:'Креветка Медведка',p:2350,img:'https://static.tildacdn.com/stor3136-3336-4232-b730-663064633830/90571890.jpg',f:'Хит',fc:'pf-r'},
+  {id:116,c:'krevetki',cat:'Креветки',n:'Лангустины с головой L2',p:2350,img:'https://static.tildacdn.com/stor3161-6263-4133-a666-386261346461/79564463.jpg',f:'',fc:''},
+  {id:117,c:'krevetki',cat:'Креветки',n:'Креветка БОТАН крупный',p:4250,img:'https://static.tildacdn.com/stor6335-3537-4338-b133-626562373333/57093193.jpg',f:'Премиум',fc:'pf-k'},
+  {id:118,c:'krevetki',cat:'Креветки',n:'Креветка Магаданская 90–120',p:2350,img:'https://static.tildacdn.com/stor6563-3333-4138-b031-383263386334/52299061.jpg',f:'',fc:''},
+  {id:119,c:'mollyuski',cat:'Моллюски',n:'Гребешок приморский Ассорти',p:1950,img:'https://static.tildacdn.com/stor3131-3830-4464-a236-313163333233/48681780.jpg',f:'',fc:''},
+  {id:120,c:'mollyuski',cat:'Моллюски',n:'Мидии синие на полу-створке 1 кг',p:895,img:'https://static.tildacdn.com/stor3131-3337-4662-a535-343832303161/89041600.jpg',f:'',fc:''},
+  {id:121,c:'mollyuski',cat:'Моллюски',n:'Каракатица с/м очищ. 1 кг',p:1450,img:'https://static.tildacdn.com/stor3666-3238-4464-b365-343431393939/39476497.jpg',f:'',fc:''},
+  {id:122,c:'polufab',cat:'Полуфабрикаты',n:'Рулет "Шеф Краба" из форели',p:1650,img:'https://static.tildacdn.com/stor3638-3862-4163-a133-626365373861/91268879.jpg',f:'Авторское',fc:'pf-b'},
+  {id:123,c:'polufab',cat:'Полуфабрикаты',n:'Мидии фарш. Том Ям 500г',p:1150,img:'https://static.tildacdn.com/stor3131-3337-4662-a535-343832303161/89041600.jpg',f:'',fc:''},
+  {id:124,c:'polufab',cat:'Полуфабрикаты',n:'Шашлычки из палтуса и лангустинов',p:1350,img:'https://static.tildacdn.com/stor3561-3939-4338-b132-373736393664/54222364.jpg',f:'',fc:''},
+];
+
+let cart=[], mCat='all', sCat='all';
+
+function renderMenu(cat){
+  mCat=cat;
+  const items = cat==='all' ? menuData : menuData.filter(i=>i.c===cat);
+  document.getElementById('menuList').innerHTML = items.map(it=>`
+    <div class="mrow rv">
+      <div class="mi-img"><img src="${it.img}" alt="${it.n}" loading="lazy"></div>
+      <div>
+        <div class="mi-name">${it.n}</div>
+        <div class="mi-desc">${it.d}</div>
+        ${it.t.length?`<div class="mi-tags">${it.t.map(([l,c])=>`<span class="mtag mtag-${c}">${l}</span>`).join('')}</div>`:''}
+      </div>
+      <div class="mi-r">
+        <div class="mi-price">${it.p.toLocaleString('ru')} <small>₽</small></div>
+        <button class="add-b ${cart.find(c=>c.id===it.id)?'done':''}" onclick="addItem(${it.id},'m')">${cart.find(c=>c.id===it.id)?'✓ Добавлено':'+ Добавить'}</button>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('#menuList .rv').forEach(el=>ro.observe(el));
+}
+function renderShop(cat){
+  sCat=cat;
+  const items = cat==='all' ? shopData : shopData.filter(p=>p.c===cat);
+  document.getElementById('shopGrid').innerHTML = items.map(p=>`
+    <div class="pcard">
+      <div class="pcard-img">
+        <img src="${p.img}" alt="${p.n}" loading="lazy">
+        ${p.f?`<span class="pcard-flag ${p.fc}">${p.f}</span>`:''}
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-cat">${p.cat}</div>
+        <div class="pcard-name">${p.n}</div>
+        <div class="pcard-ft">
+          ${p.p?`<div class="pcard-price">${p.p.toLocaleString('ru')} <small>₽</small></div>`:'<div class="pcard-price req">По запросу</div>'}
+          <button class="padd ${cart.find(c=>c.id===p.id)?'done':''}" onclick="addItem(${p.id},'s')">${cart.find(c=>c.id===p.id)?'✓':'+'}</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+document.getElementById('menuTabs').addEventListener('click', e=>{
+  const b=e.target.closest('.tab'); if(!b) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); renderMenu(b.dataset.c);
+});
+document.getElementById('shopFilter').addEventListener('click', e=>{
+  const b=e.target.closest('.sf'); if(!b) return;
+  document.querySelectorAll('.sf').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); renderShop(b.dataset.c);
+});
+
+function addItem(id, src){
+  const all = src==='m' ? menuData : shopData;
+  const item = all.find(i=>i.id===id);
+  if(!item||!item.p){showToast('Уточните цену по запросу'); return;}
+  const ex = cart.find(c=>c.id===id);
+  ex ? ex.qty++ : cart.push({...item, qty:1});
+  updateCart(); renderMenu(mCat); renderShop(sCat);
+  showToast(item.n.substring(0,26)+'… добавлено');
+  document.getElementById('cartFab').classList.add('vis');
+}
+function rmItem(id){ cart=cart.filter(c=>c.id!==id); updateCart(); renderMenu(mCat); renderShop(sCat); if(!cart.length) document.getElementById('cartFab').classList.remove('vis'); }
+function chQty(id, d){ const it=cart.find(c=>c.id===id); if(!it) return; it.qty+=d; if(it.qty<=0){rmItem(id);return;} updateCart(); }
+function updateCart(){
+  const tot=cart.reduce((s,c)=>s+c.p*c.qty,0);
+  const cnt=cart.reduce((s,c)=>s+c.qty,0);
+  document.getElementById('fabN').textContent=cnt;
+  document.getElementById('cdTot').textContent=tot.toLocaleString('ru')+' ₽';
+  const body=document.getElementById('cdBody'), foot=document.getElementById('cdFoot');
+  if(!cart.length){
+    body.innerHTML='<div class="cd-empty"><div class="cd-empty-ico">🦐</div><h3>Пусто</h3><p>Добавьте блюда или продукты</p></div>';
+    foot.style.display='none';
+  } else {
+    foot.style.display='';
+    body.innerHTML=cart.map(it=>`
+      <div class="cd-item">
+        <div class="ci-img"><img src="${it.img}" alt="${it.n}"></div>
+        <div style="flex:1">
+          <div class="ci-name">${it.n}</div>
+          <div class="ci-p">${(it.p*it.qty).toLocaleString('ru')} ₽</div>
+          <div class="ci-qty"><button class="qb" onclick="chQty(${it.id},-1)">−</button><span class="qv">${it.qty}</span><button class="qb" onclick="chQty(${it.id},1)">+</button></div>
+        </div>
+        <button class="qrm" onclick="rmItem(${it.id})">✕</button>
+      </div>`).join('');
+  }
+}
+function openCart(){ document.getElementById('co').classList.add('open'); document.getElementById('cd').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeCart(){ document.getElementById('co').classList.remove('open'); document.getElementById('cd').classList.remove('open'); document.body.style.overflow=''; }
+function placeOrder(){
+  if(!cart.length) return;
+  const note=document.getElementById('cNote').value;
+  const tot=cart.reduce((s,c)=>s+c.p*c.qty,0);
+  const lines=cart.map(c=>`${c.n} x${c.qty} = ${(c.p*c.qty).toLocaleString('ru')}₽`).join('\n');
+  const msg=encodeURIComponent(`Заказ IKRAdaKRAB:\n${lines}\nИтого: ${tot.toLocaleString('ru')}₽${note?'\n'+note:''}`);
+  window.open(`https://t.me/ikradakrab?text=${msg}`,'_blank');
+  cart=[]; updateCart(); closeCart();
+  document.getElementById('cartFab').classList.remove('vis');
+  showToast('✓ Заказ отправлен в Telegram!');
+}
+let tT;
+function showToast(msg){ const t=document.getElementById('toast'); document.getElementById('toastMsg').textContent=msg; t.classList.add('show'); clearTimeout(tT); tT=setTimeout(()=>t.classList.remove('show'),2600); }
+
+/* Booking */
+const now=new Date(); document.getElementById('bDate').value=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+function doBook(){
+  const name=document.getElementById('bName').value.trim(), phone=document.getElementById('bPhone').value.trim();
+  if(!name||!phone){showToast('⚠ Укажите имя и телефон');return;}
+  const msg=encodeURIComponent(`Бронь IKRAdaKRAB:\nИмя: ${name}\nТел: ${phone}\nДата: ${document.getElementById('bDate').value||'—'}\nВремя: ${document.getElementById('bTime').value||'—'}\nГостей: ${document.getElementById('bGuests').value}\nПовод: ${document.getElementById('bOcc').value}${document.getElementById('bNote').value?'\nПожелания: '+document.getElementById('bNote').value:''}`);
+  window.open(`https://t.me/ikradakrab?text=${msg}`,'_blank');
+  showToast('✓ Заявка отправлена! Подтвердим в течение 15 минут');
+}
+renderMenu('all'); renderShop('all');
+</script>
+</body>
+</html>
